@@ -26,5 +26,24 @@ namespace InSystDAL
             }
             return policies;
         }
+
+        public BranchDetail GetBranchById(string branchId)
+        {
+            BranchDetail branchDetail;
+            try
+            {
+                using(var context = new InSystContext())
+                {
+                    branchDetail = (from branch in context.BranchDetails
+                                    where branch.BranchId.Equals(Convert.ToInt32(branchId))
+                                    select branch).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                branchDetail = null;
+            }
+            return branchDetail;
+        }
     }
 }

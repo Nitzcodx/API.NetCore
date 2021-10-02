@@ -9,7 +9,7 @@ using InSystDAL.Models;
 
 namespace InSystServices.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PolicyController : Controller
     {
@@ -33,6 +33,22 @@ namespace InSystServices.Controllers
                 policies = null;
             }
             return Json(policies);
+        }
+
+        [HttpGet]
+        public JsonResult GetBranchById(string branchId)
+        {
+            BranchDetail branch;
+            try
+            {
+                branch = repository.GetBranchById(branchId);
+            }
+            catch (Exception)
+            {
+
+                branch = null;
+            }
+            return Json(branch);
         }
     }
 }

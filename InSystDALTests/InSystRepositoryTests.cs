@@ -18,5 +18,14 @@ namespace InSystDAL.Tests
             int result = (new InSystRepository()).GetPolicies().Count;
             Assert.AreEqual(expectedPolicies, result);
         }
+
+        [TestMethod()]
+        public void GetBranchByIdTest()
+        {
+            string branchId = "1000";
+            string expectedBranchName = "Infosys";
+            string result = (new InSystRepository().GetBranchById(branchId)).BranchName;
+            Assert.AreEqual(result, expectedBranchName);
+        }
     }
 }
