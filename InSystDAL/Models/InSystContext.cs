@@ -239,7 +239,7 @@ namespace InSystDAL.Models
 
             modelBuilder.Entity<PolicyCategory>(entity =>
             {
-                entity.HasNoKey();
+                //entity.HasNoKey();
 
                 entity.HasIndex(e => e.PolicyCategoryId, "uk_PolicyCategoryId")
                     .IsUnique();

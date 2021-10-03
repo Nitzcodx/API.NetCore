@@ -45,5 +45,44 @@ namespace InSystDAL
             }
             return branchDetail;
         }
+
+        public bool AddPolicyCategory(string policyType,string policyCategoryId, string policyCategoryName, string description, bool isActive)
+        {
+            try
+            {
+                PolicyCategory category = new PolicyCategory();
+                category.PolicyType = policyType;
+                category.PolicyCategoryId = policyCategoryId;
+                category.PolicyCategoryName = policyCategoryName;
+                category.Description = description;
+                category.IsActive = isActive;
+                using(var context = new InSystContext()){
+                    context.PolicyCategories.Add(category);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool AddPolicyCategory(List<PolicyCategory> categories)
+        {
+            try
+            {
+                using(var context = new InSystContext())
+                {
+                    context.PolicyCategories.AddRange(categories);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }
