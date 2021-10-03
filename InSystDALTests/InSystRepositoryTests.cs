@@ -58,5 +58,16 @@ namespace InSystDAL.Tests
             };
             Assert.IsTrue((new InSystRepository()).AddPolicyCategory(policyCategories));
         }
+
+        [TestMethod()]
+        public void UpdatePolicyCategoryTest()
+        {
+            Models.PolicyCategory policyCategory = new Models.PolicyCategory
+            {
+                PolicyCategoryId = "L4"
+            };
+
+            Assert.IsTrue((new InSystRepository()).UpdatePolicyCategory(policyCategory));
+        }
     }
 }
