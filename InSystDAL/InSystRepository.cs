@@ -84,5 +84,25 @@ namespace InSystDAL
                 return false;
             }
         }
+
+        public bool UpdatePolicyCategory(PolicyCategory policyCategory)
+        {
+            try
+            {
+                using(var context = new InSystContext())
+                {
+                    PolicyCategory category = (from categories in context.PolicyCategories
+                                               where categories.PolicyCategoryId.Equals(policyCategory.PolicyCategoryId)
+                                               select categories).FirstOrDefault();
+                    category.Description = "Updated from PostmanCall";
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

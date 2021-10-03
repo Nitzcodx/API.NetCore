@@ -70,7 +70,7 @@ namespace InSystServices.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddPolicyCategoryByModal(List<PolicyCategory> categories)
+        public JsonResult AddPolicyCategoryByModel(List<PolicyCategory> categories)
         {
             string message = string.Empty;
             try
@@ -105,6 +105,44 @@ namespace InSystServices.Controllers
             //]
             //child branch change
             #endregion
+        }
+
+        [HttpPut]
+        public JsonResult AddPolicyCategoryByAPIModel(List<InSystServices.Models.PolicyCategory> policyCategories)
+        {
+            string message = string.Empty;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    foreach (var policy in policyCategories)
+                    {
+
+
+                        PolicyCategory dalModelPolicy = new PolicyCategory
+                        {
+                            PolicyType = policy.PolicyType,
+                            PolicyCategoryId = policy.PolicyCategoryId,
+                            PolicyCategoryName = policy.PolicyCategoryName,
+                            Description = policy.Description,
+                            IsActive = policy.IsActive
+                        };
+                        if (repository.UpdatePolicyCategory(dalModelPolicy))
+                            continue;
+                        else
+                        {
+                            message += $"Problem with {policy.PolicyCategoryId}" + Environment.NewLine;
+                        }
+
+                    }
+                }   
+                message += "Updated records.";
+            }
+            catch (Exception ex)
+            {
+                message = "Failed to add category.";
+            }
+            return Json(message);
         }
     }
 }
