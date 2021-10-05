@@ -108,7 +108,7 @@ namespace InSystServices.Controllers
         }
 
         [HttpPut]
-        public JsonResult AddPolicyCategoryByAPIModel(List<InSystServices.Models.PolicyCategory> policyCategories)
+        public JsonResult UpdatePolicyCategoryByAPIModel(List<InSystServices.Models.PolicyCategory> policyCategories)
         {
             string message = string.Empty;
             try
@@ -117,7 +117,6 @@ namespace InSystServices.Controllers
                 {
                     foreach (var policy in policyCategories)
                     {
-
 
                         PolicyCategory dalModelPolicy = new PolicyCategory
                         {
@@ -144,5 +143,7 @@ namespace InSystServices.Controllers
             }
             return Json(message);
         }
+
+
     }
 }

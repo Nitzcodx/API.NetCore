@@ -104,5 +104,25 @@ namespace InSystDAL
                 return false;
             }
         }
+
+        public bool DeletePolicyCategory(string categoryId)
+        {
+            try
+            {
+                using (var context = new InSystContext())
+                {
+                    PolicyCategory policyCategory = (from policy in context.PolicyCategories
+                                                     where policy.PolicyCategoryId.Equals(categoryId)
+                                                     select policy).FirstOrDefault();
+                    context.PolicyCategories.Remove(policyCategory);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
