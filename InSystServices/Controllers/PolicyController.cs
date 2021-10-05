@@ -108,7 +108,7 @@ namespace InSystServices.Controllers
         }
 
         [HttpPut]
-        public JsonResult AddPolicyCategoryByAPIModel(List<InSystServices.Models.PolicyCategory> policyCategories)
+        public JsonResult UpdatePolicyCategoryByAPIModel(List<InSystServices.Models.PolicyCategory> policyCategories)
         {
             string message = string.Empty;
             try
@@ -117,7 +117,6 @@ namespace InSystServices.Controllers
                 {
                     foreach (var policy in policyCategories)
                     {
-
 
                         PolicyCategory dalModelPolicy = new PolicyCategory
                         {
@@ -141,6 +140,31 @@ namespace InSystServices.Controllers
             catch (Exception ex)
             {
                 message = "Failed to add category.";
+            }
+            return Json(message);
+        }
+
+        /// <summary>
+        /// recommended not to add delete operations in service
+        /// 1. will trigger delete operation on same item multiple time
+        /// 2. could delete data which was required
+        /// </summary>
+        /// <param name="categoryId">Policy category id to uniquely identify which category to be removed</param>
+        /// <returns></returns>
+        [HttpDelete]
+        public JsonResult RemovePolicyCategory(string categoryId)
+        {
+            string message = string.Empty;
+            try
+            {
+                if (repository.DeletePolicyCategory(categoryId))
+                    message = $"Removed category {categoryId}.";
+                else
+                    message = "Some error occurred";
+            }
+            catch (Exception)
+            {
+                message = "Exception at Service. Try again.";
             }
             return Json(message);
         }

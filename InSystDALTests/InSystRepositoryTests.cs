@@ -69,5 +69,11 @@ namespace InSystDAL.Tests
 
             Assert.IsTrue((new InSystRepository()).UpdatePolicyCategory(policyCategory));
         }
+
+        [TestMethod()]
+        public void DeletePolicyCategoryTest()
+        {
+            Assert.IsTrue((new InSystRepository()).DeletePolicyCategory("L5"));
+        }
     }
 }
